@@ -30,6 +30,7 @@ class FruitListViewModel @Inject constructor(
             try {
                 val fruits = repository.getFruits()
                 _state.value = FruitListState(fruits = fruits)
+                _state.value.isLoading = false
             } catch (e: Exception) {
                 _state.value.isError = true
             }
