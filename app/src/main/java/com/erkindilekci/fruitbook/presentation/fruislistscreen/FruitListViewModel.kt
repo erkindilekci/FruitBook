@@ -27,8 +27,12 @@ class FruitListViewModel @Inject constructor(
 
     private fun getFruits() {
         viewModelScope.launch(Dispatchers.Default) {
-            val fruits = repository.getFruits()
-            _state.value = FruitListState(fruits = fruits)
+            try {
+                val fruits = repository.getFruits()
+                _state.value = FruitListState(fruits = fruits)
+            } catch (e: Exception) {
+                _state.value.isError = true
+            }
         }
     }
 }
